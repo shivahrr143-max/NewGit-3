@@ -34,10 +34,6 @@ resource "aws_route_table_association" "public_subnet_assoc" {
   subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_rt.id
 }
-resource "aws_route_table_association" "public_subnet_assoc" {
-  subnet_id      = aws_subnet.public_subnet.id
-  route_table_id = aws_route_table.public_rt.id
-}
 resource "aws_security_group" "web_sg" {
   name        = "mini-project-sg"
   description = "Allow SSH & HTTP"
@@ -67,12 +63,12 @@ resource "aws_security_group" "web_sg" {
   tags = { Name = "mini-project-sg" }
 }
 resource "aws_key_pair" "demo_key" {
-  key_name   = "mini-project-key"
-  public_key = file("C:/Users/User/.ssh/id_rsa.pub")
+  key_name   = "mini-project-key-2"
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 resource "aws_instance" "web" {
-  ami                    = "ami-0c02fb55956c7d316" # Ubuntu 20.04
-  instance_type          = "t2.micro"
+  ami                    = "ami-07a00cf47dbbc844c" # Ubuntu 20.04
+  instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.web_sg.id]
   key_name               = aws_key_pair.demo_key.key_name
