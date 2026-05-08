@@ -13,7 +13,7 @@ pipeline {
         stage('Ansible Configure') {
             steps {
                 dir('ansible') {
-                    sh 'ansible-playbook -i inventory.ini playbook.yml'
+                    sh 'ansible-playbook -i inventory.ini playbook.yaml'
                 }
             }
         }
